@@ -74,7 +74,10 @@ def ParseHTML(currentSearchAt):
     submitButton.click()
     logWithDateTime("Submitted form, waiting for response...")
     ## Parse details
-    checkSubmitted = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="lblvillage"][text() = "%s"]' % currentSearchAt)))
+    if optionRural:
+        checkSubmitted = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="lblvillage"][text() = "%s"]' % currentSearchAt)))
+    else:
+        checkSubmitted = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="lblwardname"][text() = "%s"]' % currentSearchAt)))
     populationData = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="gvPopulation"]/tbody')))
     logWithDateTime("Ready to parse...")
     row = []
